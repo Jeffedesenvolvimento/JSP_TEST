@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ProjetoController {
 
+	@RequestMapping(value = "/home")
+	public String home() {
+		return "projetoHome";
+	}
+	
 	@RequestMapping(value = "/")
 	public String teste() {
-		return "projeto";
+		return "projetoCadastro";
 	}
 }
