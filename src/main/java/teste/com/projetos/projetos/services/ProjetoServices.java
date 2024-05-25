@@ -13,17 +13,24 @@ public class ProjetoServices {
 
 	@Autowired
 	private ProjetoRepository projetoRepository;
-	
-	public boolean salvar (Projeto projeto) {			
+
+	public boolean salvar(Projeto projeto) {
 		projetoRepository.save(projeto);
-		if(projeto.getId() != null) {
+		if (projeto.getId() != null) {
 			return true;
 		}
 		return false;
 	}
 
 	public List<Projeto> getAll() {
-		// TODO Auto-generated method stub
 		return projetoRepository.findAll();
+	}
+
+	public void delete(Long id) {
+		projetoRepository.deleteById(id);
+	}
+
+	public Projeto findById(Long id) {
+		return projetoRepository.findById(id).orElseThrow();
 	}
 }
