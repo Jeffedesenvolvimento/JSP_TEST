@@ -1,11 +1,11 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page import="teste.com.projetos.projetos.model.Membro"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-<title>Cadastro de Projetos</title>
+<title>Editar Projetos</title>
 <style type="text/css">
 .titulo {
 	width: 100%;
@@ -46,21 +46,21 @@
 			<header>
 				<nav class="navbar navbar-light bg-light">
 					<div class="container-fluid">
-						<a class="navbar-brand titulo" href="#">Cadastrar Projetos</a>
+						<a class="navbar-brand titulo" href="#">Editar Projetos</a>
 					</div>
 				</nav>
 			</header>
 		</div>
 		<div class="d-flex flex-column mb-3 div-form" style="width: 80%;">
 			<div class="p-2">
-				<h1 class="subTitulo">Criar Projeto</h1>
+				<h1 class="subTitulo">Editar Projeto</h1>
 			</div>
 			<div class="p-2">
-				<form action="/cadastrar" method="POST" modelAttribute="projeto">
+				<form:form action="/editar" method="POST" modelAttribute="projeto">
 					<div class="mb-3">
 						<label for="nome" class="form-label" style="font-weight: bold;">Nome</label>
-						<input type="text" class="form-control" style="width: 100%"
-							id="nome" name="nome">
+						<form:input type="text" class="form-control" style="width: 100%"
+							id="nome" path="nome" />
 					</div>
 
 					<div class="d-inline-flex mb-3" style="width: 100%">
@@ -69,7 +69,8 @@
 								style="font-weight: bold;">Gerente Responsável</label> <select
 								class="form-select" aria-label="Default select example"
 								id="gpResponsavel" name="gpResponsavel">
-								<option selected>Selecione um status</option>
+								<%-- 								<option selected>${projeto.gpResponsavel.nome}</option> --%>
+								<option selected>Selecione a criticidade</option>
 								<%
 								try {
 									Class.forName("org.postgresql.Driver");
@@ -93,10 +94,10 @@
 							</select>
 						</div>
 						<div style="width: 50%">
-							<label class="form-label"
-								style="font-weight: bold;">Orçamento total</label> <input
-								type="text" class="form-control mask" id="orcamento"
-								name="orcamento" class="orca">
+							<label class="form-label" style="font-weight: bold;">Orçamento
+								total</label>
+							<form:input type="text" class="form-control mask" id="orcamento"
+								name="orcamento" path="orcamento" />
 						</div>
 					</div>
 					<div class="d-inline-flex mb-3" style="width: 100%">
@@ -110,8 +111,9 @@
 							<!-- Datepicker as text field -->
 							<div class=" input-group date" style="width: 100%"
 								data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control" placeholder="dd/mm/yyyy"
-									id="dtInicio" name="dtInicio">
+								<form:input type="text" class="form-control"
+									placeholder="dd/mm/yyyy" id="dtInicio" name="dtInicio"
+									path="dtInicio" />
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
@@ -126,8 +128,9 @@
 							</div>
 							<div class="input-group date" style="width: 100%"
 								data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control" id="dtPrevisaoTermino"
-									name="dtPrevisaoTermino" placeholder="dd/mm/yyyy">
+								<form:input type="text" class="form-control"
+									id="dtPrevisaoTermino" name="dtPrevisaoTermino"
+									placeholder="dd/mm/yyyy" path="dtPrevisaoTermino" />
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
@@ -140,8 +143,9 @@
 							</div>
 							<div class="input-group date" style="width: 100%"
 								data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control" id="dtRealTermino"
-									name="dtRealTermino" placeholder="dd/mm/yyyy">
+								<form:input type="text" class="form-control" id="dtRealTermino"
+									name="dtRealTermino" placeholder="dd/mm/yyyy"
+									path="dtRealTermino" />
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
@@ -151,14 +155,16 @@
 					<div class="d-inline-flex mb-3" style="width: 100%">
 						<div style="width: 33.33%; padding-right: 2%">
 							<label for="descricao" class="form-label"
-								style="font-weight: bold;">Descrição</label> <input type="text"
-								class="form-control" id="descricao" name="descricao">
+								style="font-weight: bold;">Descrição</label>
+							<form:input type="text" class="form-control" id="descricao"
+								name="descricao" path="descricao" />
 						</div>
 						<div style="width: 33.33%; padding-right: 2%">
 							<label for="status" class="form-label" style="font-weight: bold;">Status</label>
 							<select class="form-select" id="status" name="status"
 								aria-label="Default select example">
-								<option selected>Selecione um status</option>
+<%-- 								<option selected>${projeto.statusDescricao}</option> --%>
+								<option selected>Selecione a criticidade</option>
 								<option value=1>análise</option>
 								<option value=2>análise realizada</option>
 								<option value=3>análise aprovada</option>
@@ -174,6 +180,7 @@
 								style="font-weight: bold;">Criticidade</label> <select
 								class="form-select" id="criticidade" name="criticidade"
 								aria-label="Default select example">
+<%-- 								<option selected>${projeto.criticidadeDescricao}</option> --%>
 								<option selected>Selecione a criticidade</option>
 								<option value=1>Baixo</option>
 								<option value=2>Médio</option>
@@ -191,7 +198,7 @@
 							<button type="submit" class="btn btn-success">Cadastrar</button>
 						</div>
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>
@@ -212,9 +219,9 @@
 		});
 	</script>
 	<script>
-		function formatCurrency() {
-
-		}
+		$(".mask").inputmask('Regex', {
+			regex : "^[0-9]{1,6}(\\,\\d{1,2})?$"
+		});
 	</script>
 </body>
 </html>
