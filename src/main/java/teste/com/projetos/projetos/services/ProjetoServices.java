@@ -14,23 +14,33 @@ public class ProjetoServices {
 	@Autowired
 	private ProjetoRepository projetoRepository;
 
-	public boolean salvar(Projeto projeto) {
+	public void salvar(Projeto projeto) {
 		projetoRepository.save(projeto);
-		if (projeto.getId() != null) {
+	}
+
+	public List<Projeto> getAll() {
+		return projetoRepository.findAll(); 
+	}
+
+	public boolean delete(Long id) {
+		if(this.validarStatusExclucao(id)) {
+			projetoRepository.deleteById(id);
 			return true;
 		}
 		return false;
 	}
 
-	public List<Projeto> getAll() {
-		return projetoRepository.findAll();
-	}
-
-	public void delete(Long id) {
-		projetoRepository.deleteById(id);
-	}
-
 	public Projeto findById(Long id) {
 		return projetoRepository.findById(id).orElseThrow();
+	}
+
+	public boolean validarStatusExclucao(Long id) {
+		Projeto p = this.findById(id);
+		if (p != null && p.getStatus() != null && p.getStatus() !=4 && p.getStatus() !=6 && p.getStatus() !=7 ) {
+			return true;
+		}
+
+		return false;
+
 	}
 }

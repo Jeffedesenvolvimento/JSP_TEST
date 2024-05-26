@@ -3,6 +3,7 @@ package teste.com.projetos.projetos.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +23,11 @@ public class ProjetoController {
 	@Autowired
 	private ProjetoServices projetoServices;
 
-	@RequestMapping(value = "/home")
-	public String home(@ModelAttribute("message") String message, Model model) {
+	@RequestMapping(value = "/")
+	public String home(Model model) { 
 		List<Projeto> lista = projetoServices.getAll();
 		model.addAttribute("projeto", new Projeto());
 		model.addAttribute("projetoList", lista);
-		model.addAttribute("message", message);
 		return "projetoHome";
 	}
 
@@ -39,22 +39,18 @@ public class ProjetoController {
 	}
 
 	@PostMapping(value = "/cadastrar")
-	public String doPost(Projeto projeto, RedirectAttributes redirectAttributes, Model model) {
-		if (this.projetoServices.salvar(projeto)) {
-			model.addAttribute("projetoList", projetoServices.getAll());
-			model.addAttribute("projeto", new Projeto());
-			redirectAttributes.addFlashAttribute("message", "Cadastrado com sucesso");
-			projeto = null;
-		} else {
-			redirectAttributes.addFlashAttribute("message", "Erro ao cadastrar");
-		}
-		return "redirect:/home";
+	public String doPost(Projeto projeto) {
+		this.projetoServices.salvar(projeto);
+		return "redirect:/";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes, Model model) {
-		projetoServices.delete(id);
-		return "redirect:/home";
+	public String delete(@PathVariable Long id) {
+		if (projetoServices.delete(id)) {
+			return "redirect:/";
+		}else {
+			return "Projeto com status sem permissão para exclusão";
+		}
 	}
 
 	@GetMapping("/edit/{id}")
@@ -64,21 +60,10 @@ public class ProjetoController {
 		return "projetoEditar";
 	}
 
-	@PostMapping("/editSave")
-	public String editSave(Projeto projeto, RedirectAttributes redirectAttributes) {
-		if (projetoServices.salvar(projeto)) {
-			redirectAttributes.addFlashAttribute("message", "Edit Success");
-			return "redirect:/home";
-		}
-
-		redirectAttributes.addFlashAttribute("message", "Edit Failure");
-		return "redirect:/home";
+	@PostMapping("/editar")
+	public String editSave(Projeto projeto) {
+		projetoServices.salvar(projeto);
+		return "redirect:/";
 	}
-	
-	@ResponseBody
-	@GetMapping(value = "projeto/all")
-	public List<Projeto> home() {
 
-		return projetoServices.getAll();
-	}
 }
