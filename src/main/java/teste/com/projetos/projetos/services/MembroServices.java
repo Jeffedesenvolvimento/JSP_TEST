@@ -9,7 +9,7 @@ import teste.com.projetos.projetos.model.Membro;
 import teste.com.projetos.projetos.repositories.MembroRepository;
 
 @Service
-public class MembrosServices {
+public class MembroServices {
 
 	@Autowired
 	private MembroRepository repository;
