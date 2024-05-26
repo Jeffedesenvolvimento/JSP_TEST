@@ -198,6 +198,10 @@
 							<button type="submit" class="btn btn-success">Cadastrar</button>
 						</div>
 					</div>
+					<div hidden="true">
+						<form:input type="text" class="form-control" style="width: 100%"
+							id="id" path="id" />
+					</div>
 				</form:form>
 			</div>
 		</div>
