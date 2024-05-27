@@ -37,6 +37,19 @@
 	text-decoration: blink black;
 	font-weight: bold;
 }
+/* #nameError { */
+/*   display: none; */
+/*   font-size: 0.8em; */
+/* } */
+
+/* #nameError.visible { */
+/*   display: block; */
+/* } */
+
+/* input.invalid { */
+/*   border-color: red; */
+/* } */
+
 </style>
 </head>
 <body>
@@ -59,17 +72,16 @@
 				<form action="/cadastrar" method="POST" modelAttribute="projeto">
 					<div class="mb-3">
 						<label for="nome" class="form-label" style="font-weight: bold;">Nome</label>
-						<input type="text" class="form-control" style="width: 100%"
+						<input type="text" required="true" class="form-control" style="width: 100%"
 							id="nome" name="nome">
 					</div>
 
 					<div class="d-inline-flex mb-3" style="width: 100%">
 						<div style="width: 50%; padding-right: 2%">
 							<label for="gpResponsavel" class="form-label"
-								style="font-weight: bold;">Gerente Responsável</label> <select
+								style="font-weight: bold;">Gerente Responsável</label> <select required="true"
 								class="form-select" aria-label="Default select example"
 								id="gpResponsavel" name="gpResponsavel">
-								<option selected>Selecione um status</option>
 								<%
 								try {
 									Class.forName("org.postgresql.Driver");
@@ -93,10 +105,9 @@
 							</select>
 						</div>
 						<div style="width: 50%">
-							<label class="form-label"
-								style="font-weight: bold;">Orçamento total</label> <input
-								type="text" class="form-control mask" id="orcamento"
-								name="orcamento" class="orca">
+							<label class="form-label" style="font-weight: bold;">Orçamento
+								total</label> <input type="text" class="form-control" required="true"
+								id="orcamento" name="orcamento" class="orca">
 						</div>
 					</div>
 					<div class="d-inline-flex mb-3" style="width: 100%">
@@ -110,7 +121,7 @@
 							<!-- Datepicker as text field -->
 							<div class=" input-group date" style="width: 100%"
 								data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control" placeholder="dd/mm/yyyy"
+								<input type="text" class="form-control" placeholder="dd/mm/yyyy" required="true"
 									id="dtInicio" name="dtInicio">
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
@@ -126,7 +137,7 @@
 							</div>
 							<div class="input-group date" style="width: 100%"
 								data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control" id="dtPrevisaoTermino"
+								<input type="text" class="form-control" id="dtPrevisaoTermino" required="true"
 									name="dtPrevisaoTermino" placeholder="dd/mm/yyyy">
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
@@ -140,7 +151,7 @@
 							</div>
 							<div class="input-group date" style="width: 100%"
 								data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control" id="dtRealTermino"
+								<input type="text" class="form-control" id="dtRealTermino" required="true"
 									name="dtRealTermino" placeholder="dd/mm/yyyy">
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
@@ -151,14 +162,13 @@
 					<div class="d-inline-flex mb-3" style="width: 100%">
 						<div style="width: 33.33%; padding-right: 2%">
 							<label for="descricao" class="form-label"
-								style="font-weight: bold;">Descrição</label> <input type="text"
+								style="font-weight: bold;">Descrição</label> <input type="text" required="true"
 								class="form-control" id="descricao" name="descricao">
 						</div>
 						<div style="width: 33.33%; padding-right: 2%">
 							<label for="status" class="form-label" style="font-weight: bold;">Status</label>
-							<select class="form-select" id="status" name="status"
+							<select class="form-select" id="status" name="status" required="true"
 								aria-label="Default select example">
-								<option selected>Selecione um status</option>
 								<option value=1>análise</option>
 								<option value=2>análise realizada</option>
 								<option value=3>análise aprovada</option>
@@ -172,9 +182,8 @@
 						<div style="width: 33.33%">
 							<label for="criticidade" class="form-label"
 								style="font-weight: bold;">Criticidade</label> <select
-								class="form-select" id="criticidade" name="criticidade"
+								class="form-select" id="criticidade" name="criticidade" required="true"
 								aria-label="Default select example">
-								<option selected>Selecione a criticidade</option>
 								<option value=1>Baixo</option>
 								<option value=2>Médio</option>
 								<option value=3>Alta</option>
@@ -210,11 +219,6 @@
 		$('.input-group.date').datepicker({
 			format : "dd/mm/yyyy"
 		});
-	</script>
-	<script>
-		function formatCurrency() {
-
-		}
 	</script>
 </body>
 </html>
