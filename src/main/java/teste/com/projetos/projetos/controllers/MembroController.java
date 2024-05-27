@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import teste.com.projetos.projetos.model.Membro;
 import teste.com.projetos.projetos.services.MembroAtribuicaoServices;
-import teste.com.projetos.projetos.services.MembrosServices;
+import teste.com.projetos.projetos.services.MembroServices;
 
 @Controller
 public class MembroController {
 
 	@Autowired
-	private MembrosServices membrosServices;
+	private MembroServices membrosServices;
 	
 	@Autowired
 	private MembroAtribuicaoServices atribuicaoServices;
@@ -36,10 +36,11 @@ public class MembroController {
 			if (this.membrosServices.salvar(membro)) {
 				return "criado com sucesso.";
 			}
+			return "erro";
 
 		}else {
 			return "Atribuição não existe.";
 		}
-		return "erro";
+		
 	}
 }

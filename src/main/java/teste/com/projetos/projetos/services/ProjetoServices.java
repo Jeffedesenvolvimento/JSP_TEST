@@ -31,7 +31,7 @@ public class ProjetoServices {
 	}
 
 	public Projeto findById(Long id) {
-		return projetoRepository.findById(id).orElseThrow();
+		return projetoRepository.findById(id).orElse(null);
 	}
 
 	public boolean validarStatusExclucao(Long id) {
